@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Closure</title>
+    
+</head>
+<body>
+   <style>
+    body{background-color: aquamarine;}
+   </style>
+    <h2>Q-1<pre>   function counter(){
+        var counter = 0;
+    
+        function IncreaseCounter() {
+            return counter += 1;
+        };
+    
+        return IncreaseCounter;
+    }
+    
+    var counter = counter();
+    alert(counter());
+    alert(counter());
+    alert(counter());
+    alert(counter());</pre></h2>
+    <br>
+    ANS-<p> Firstly we have a function (counter) in which we declare a variable assign a value(0)
+        then a innerfunction declare name as (IncreaseCounter) in which we return a Previously declare (variable+=1)
+        then outer function returns innerfunction name. Now we call the function (counter) and stores in counter variable.
+        Now console the counter variable like function.
+         first time, we call innerfunction (it return from function(counter) and take the value of variable from closure
+        (outside the function) and increment with 1 and console the output "1").
+        On second time, we call same innerfunction. So value of variable has already taken from first call. Then return the value by increment the previouslly taken value. The Output is "2".
+        On third time, we call same function, So like above function calling, The ouput is "3".
+        And So on, The output is "4".</p>
+        <br>
+        <h2>Q-2<pre>"let count = 0;
+            (function () {
+              if (count === 0) {
+                let count = 1;
+                console.log(count); // What is logged?
+              }
+              console.log(count); // What is logged?
+            })();"</pre></h2>
+            <br>
+            ANS-<p>Firstly declare a variable and asign the value (0).Now declare the function and call directly.
+                  In function, we take the condition if previously declared variable is 0. Then create a new variable named same as previously declared variable and assign value (1). Now console this variable. Then close the condition.
+                now console same variable.
+                On first console, count variable exist in if condition, So The output is "1"
+                On Second console, count variable does not in function scope, So it will find in global scope. The output is "0"</p>
+                <br>
+                <h2>Q-3<pre>"for (var i = 0; i < 3; i++) {
+                    setTimeout(function log() {
+                      console.log(i); // What is logged?
+                    }, 1000);
+                  }"</pre></h2>
+                  <br>
+                  ANS-<p>We know that var is function scoped variable, so it will store the value whenever the value change.In this (for) loop, the value of i is (0) which is less then (3), 
+                    so it will go in the loop and execute the settimeout function.
+                    Now the value of i will become (1) with increment of 1, so it will again go in the loop and execute the settimeout function.
+                    Now the value of i will become (2) with increment of 1, so it will again go in the loop and execute the settimeout function.
+                    Now the value of i will become (3) with increment of 1, but it is not less than (3). so it will not go in the loop.
+                    Now if we talking about settimeout function. This function will execute after 1000 miliseconds or 1 seconds. We already know that the execution time of (for) loop 
+                    function is less than 1 miliseconds, So all three execution of settimeout function will execute after the execution of (for) loop. So in settimeout function, there is a
+                     console the value of (i). So at the end of (for) loop, the value of i is (3). So the function is print the (3) for three times.</p>
+                     ,<br>
+                     <h2>Q-4.Write a code to calculate area of a rectangle using inner function. In this case outer function should accept parameter length and inner function should accept parameter breadth.</h2>
+                     ,<br>
+                     ANS-<pre>function area(l){
+                        function answer(b){
+                            return l*b;
+                        }
+                        return answer;
+                    }
+                    
+                    let first_parameter = area(5)
+                    let total_ans = first_parameter(7)
+                    console.log(total_ans)</pre>
+                    <br>
+                    <h2>Q-5.Take a variable in outer function and create an inner function to increase the counter every time it is called</h2>
+                    <br>
+                    ANS-<pre>function outerfunction(){
+                        var counter=0;
+                        function innerfunction(){
+                        return counter += 1;
+                        }
+                        return innerfunction;
+                        }
+                        let result = outerfunction()
+                        console.log(result())</pre>
+                        <br>
+                        <h2>Q-6<pre>"Print Output
+
+                            var a = 12;
+                            (function () {
+                              alert(a);
+                            })();"</pre></h2>
+                            <br>
+                            ANS-<p>12
+                                when we console a variable in function. It will search the variable in function scope, if it will not find.
+                                Then it will go outside the function scope. If it will get the variable. it will console the value (if exist)</p>
+                            <br>
+                            <h2>Q-7<pre>var a = 10;
+                                var x = (function () {
+                                  var a = 12;
+                                  return function () {
+                                    alert(a);
+                                  };
+                                })();
+                                x();</pre></h2>
+                                <br>
+                                ANS-<p>Firstly we declare a var variable and asign the value(10). Now create a function (x).
+                                       Now we again declare the same var previously declared variable and asign the value(12).
+                                       then we return a new function in which we console the same previously declared variable.
+                                       Now we call the function(x).When we console the variable in return function. it will check if there is existence of variable in function scope.
+                                    And after the checking, it will go check to outside the function and check there.
+                                    Then it will find this variable and print the output(12)</p>
+                                    ,<br>
+                                    <h2>Q-8<pre>"var globalVar = ""xyz"";
+                                              (function outerFunc(outerArg) {
+                                            var outerVar = 'a';
+                                            (function innerFunc(innerArg) {
+                                            var innerVar = 'b';
+                                            console.log(
+                                                ""outerArg = "" + outerArg + ""\n"" +
+                                                ""innerArg = "" + innerArg + ""\n"" +
+                                                ""outerVar = "" + outerVar + ""\n"" +
+                                                ""innerVar = "" + innerVar + ""\n"" +
+                                                ""globalVar = "" + globalVar);
+                                            
+                                            })(456);
+                                        })(123);"</pre></h2>
+                                        <br>
+                                        ANS-<p>Firstly it declare the global variable. Then declare the outerfunction with parameter.
+                                            Then declare another variable in outerfunction. Then again declare the innerfunction with parameter.
+                                            Then again declare another variable in innerfunction.
+                                            After This, console the parameter which is passed in outerfunction.
+                                            Then again console the paramter which is passed in innerfunction.
+                                            Then again console the varaible which is declared in outerfunction.
+                                            Then again console the variable which is declared in innerfunction.
+                                            Them again console the variable which is declared in global scope.
+                                             After this, just call the innerfunction with paramter(456) and call outerfunction with parameter(123)
+                                            The Output is following in below.
+                                            outerArg = 123
+                                            innerArg = 456
+                                            outerVar = a
+                                            innerVar = b
+                                            globalVar = xyz</p>
+</body>
+</html>
